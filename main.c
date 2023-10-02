@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define N 3
+#define N 18
 
 
 char* singleBit(char i);
@@ -16,7 +16,7 @@ void hexToBin2(char **to, char *from);
 
 
 int main() {
-    char package[] = "AA1";//F2EF9D3A5";//"AA0F 2EF9 D3A5"
+    char package[] = "AA1F2EF9D3A5123456";//"AA0F 2EF9 D3A5"
     int countOfShots = 0;
     FILE* fp = fopen("data.txt", "w");
 
@@ -79,22 +79,24 @@ void deCiphSecLevel(FILE *fp, int count) {
         if(shot[7] == '1') shot[7] = shot[3];
         else shot[7] = shot[3] == '1' ? '0' : '1';
         // shot[8] = '\0';
-        
+        printf("%s---", shot);
         char checkOfNum[4];
         checkOfNum[0] = shot[4];
         checkOfNum[1] = shot[5];
         checkOfNum[2] = shot[6];
         checkOfNum[3] = shot[7];
-        checkOfNum[4] = '\0';
+        // checkOfNum[4] = '\0';
         char numFromShot = binToHex(checkOfNum);
+        // printf("===%s", shot);
 
         if(countOfShot == 15 && i != N - 1) countOfShot = 0;
         if(i == N - 1) countOfShot = 15;
         char numFromCount = getHexNumber(countOfShot);
 
-        printf("%c==%c  in shot %d: %s\n", numFromCount, numFromShot, i, shot);
+        printf("%c==%c  in shot %d: \n", numFromCount, numFromShot, i);
+        // printf("%s\n", shot);
         if(numFromCount != numFromShot) {
-            printf("    ==%c==%c    error in shot num %d: %s\n", numFromCount, numFromShot, i, shot);
+            printf("    ==%c!=%c    error in shot num %d: %s\n", numFromCount, numFromShot, i, shot);
             // if(shot[0] != '0') printf("23\n");
             // if(shot[7] != '1') printf("234\n");
             // if(shot[1] != prevParBit) printf("  2345  %c\n", prevParBit);
@@ -105,7 +107,7 @@ void deCiphSecLevel(FILE *fp, int count) {
         }
         countOfShot++;
     }
-    if(N -1 != count) printf("%d==%d", N, count);
+    if(N != count) printf("%d==%d", N, count);
     answer[count] = '\0';
     printf("\n%s\n", answer);
     free(answer);
@@ -174,6 +176,7 @@ void hexToBin2(char **to, char* from) {
 
         binBit = singleBit(from[i]);
         strcat(to[i], binBit);
+
         char* numberOfShot;
         if(numberOfShots == 15) numberOfShots = 0;
         char num = getHexNumber(numberOfShots);
@@ -184,11 +187,11 @@ void hexToBin2(char **to, char* from) {
         numberOfShots++;
         to[i][8] = '\0';
     }
-    to[numberOfShots - 1][4] = '1';
-    to[numberOfShots - 1][5] = '1';
-    to[numberOfShots - 1][6] = '1';
-    to[numberOfShots - 1][7] = '1';
-    to[numberOfShots - 1][8] = '\0';
+    to[N - 1][4] = '1';
+    to[N - 1][5] = '1';
+    to[N - 1][6] = '1';
+    to[N - 1][7] = '1';
+    to[N - 1][8] = '\0';
 }
 
 char getHexNumber( int n) {
