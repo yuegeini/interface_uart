@@ -16,7 +16,7 @@ void hexToBin2(char **to, char *from);
 
 
 int main() {
-    char package[] = "AA1F2EF9D3A5123456";//"AA0F 2EF9 D3A5"
+    char package[] = "BB1F2EF9D3A5123456";//"AA0F 2EF9 D3A5"
     int countOfShots = 0;
     FILE* fp = fopen("data.txt", "w");
 
