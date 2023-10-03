@@ -20,7 +20,7 @@ void hexToBin2(char **to, char *from);
 int main() {
     char package[] = "AA1F2EF9D3A5";//"AA0F 2EF9 D3A5"
     int countOfShots = 0;
-    FILE* fp = fopen("data.txt", "r+");
+    FILE* fp = fopen("data.txt", "w");
 
     for(int i = 0; package[i] != '\0'; i++) {
         countOfShots++;
