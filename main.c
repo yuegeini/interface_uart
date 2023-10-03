@@ -107,7 +107,7 @@ void deCiphSecLevel(FILE *fp, int count) {
         }
         countOfShot++;
     }
-    if(N != count) printf("%d==%d", N, count);
+    // if(N != count) printf("%d==%d", N, count);
     answer[count] = '\0';
     printf("\n%s\n", answer);
     free(answer);
@@ -120,7 +120,7 @@ void deCiphSecLevel(FILE *fp, int count) {
 
 char binToHex(char *inp) {
     char res;
-    char *shot = malloc(4 * sizeof(char));
+    char *shot;
     shot[0] = inp[0];
     shot[1] = inp[1];
     shot[2] = inp[2];
@@ -147,7 +147,7 @@ char binToHex(char *inp) {
         // printf("ALLARM\n");
         res = 'Z';
     }
-    free(shot);
+    // free(shot);
     return res;
 }
 //01101000011010001100010111111011100101101111011011111010110011100110101101011010110100010010111
